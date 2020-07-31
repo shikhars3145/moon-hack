@@ -1,0 +1,48 @@
+.header {
+  height: 7.5rem;
+  display: flex;
+  padding: 0 6rem;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  position: relative;
+  width: 100%;
+  //   background-color: rgba(255, 255, 255, 0);
+  //   background-color: transparent;
+  //   filter: blur(2rem);
+  color: #fff;
+  box-shadow: 0 5px 15px rgba($color: #000000, $alpha: 0.5);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '';
+    background-color: #000000c7;
+    filter: blur(2rem);
+    z-index: -10;
+  }
+
+  .nav {
+    display: flex;
+    a {
+      color: #fff;
+    }
+    li {
+      padding: 0 2rem;
+      cursor: pointer;
+      list-style: none;
+      transition: all 0.2s ease;
+
+      &:last-child {
+        padding-right: 0;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
