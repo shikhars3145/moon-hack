@@ -1,0 +1,29 @@
+.study-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .ask-text {
+    font-size: 3rem;
+    color: white;
+  }
+
+  .img-container {
+    height: 50rem;
+    padding: 2rem;
+    background-color: #00000091;
+    border-radius: 2rem;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .btn-container {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-around;
+  }
+}
