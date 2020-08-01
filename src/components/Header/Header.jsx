@@ -6,7 +6,9 @@ import './Header.scss';
 export default function Header() {
   return (
     <div className="header">
-      <div className="logo">STARGAZER</div>
+      <Link to="/">
+        <div className="logo">STARGAZER</div>
+      </Link>
       <ul className="nav">
         <Link to="/study">
           <li>Study</li>
