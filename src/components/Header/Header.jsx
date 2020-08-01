@@ -17,7 +17,7 @@ export default function Header() {
           <li>Explore</li>
         </Link>
         <li>
-          <i class="fas fa-bell"></i>
+          <i className="fas fa-bell"></i>
         </li>
       </ul>
     </div>
