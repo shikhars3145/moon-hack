@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import style from "./Globe.module.scss";
 import { TextureLoader, MeshStandardMaterial, SphereBufferGeometry } from "three";
-import { Canvas } from "react-three-fiber";
+import { Canvas, useThree } from "react-three-fiber";
 import earthImage from "./earthmap1k.jpg";
 
 /**
@@ -38,7 +38,15 @@ type Props = {
  */
 function Earth(props: Props) {
   const earthMaterial = useMaterial(earthImage);
-  const earthShape = useSphere(1.5);
+  const earthShape = useSphere(10);
+  const { camera } = useThree();
+
+  // Reset camera on load.
+  useEffect(() => {
+    camera.position.x = 10;
+    camera.position.z = 0;
+    camera.lookAt(0, 0, 0);
+  }, [camera]);
 
   return (
     <mesh
@@ -55,7 +63,7 @@ function Globe() {
       <Canvas>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        <Earth position={[1.2, 0, 0]} />
+        <Earth position={[-20, 0, 0]} />
       </Canvas>
     </div>
   );
