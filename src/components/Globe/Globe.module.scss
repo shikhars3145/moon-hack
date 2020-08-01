@@ -1,0 +1,9 @@
+.container {
+  position: absolute;
+  background: #eee;
+  /** Absolute Center with Margin */
+  top: 10em;
+  left: 10em;
+  width: calc(100vw - 20em);
+  height: calc(100vh - 20em);
+}
