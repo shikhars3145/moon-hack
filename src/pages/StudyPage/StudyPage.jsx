@@ -12,11 +12,14 @@ import {
   tagsArray,
 } from '../../Astrometry/astrometryUtils';
 
+import TagsContainer from '../../components/TagsContainer/TagsContainer';
+
 export class StudyPage extends Component {
   constructor() {
     super();
     this.state = {
       tags: [],
+      showTagsContainer: false,
     };
   }
 
@@ -41,6 +44,9 @@ export class StudyPage extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
+    this.setState({ showTagsContainer: true });
+    // this.tagsContainer.style.display = 'block';
+
     const radarRes = await axios.get('https://api.radar.io/v1/geocode/ip', {
       headers: {
         authorization: 'prj_live_sk_4216c851eed8ba07a7b61295c5f2a15ce87ea971',
@@ -104,6 +110,11 @@ export class StudyPage extends Component {
           >
             <img src="" alt="" ref={(el) => (this.imagePreview = el)} />
           </div>
+
+          <TagsContainer
+            tags={this.state.tags}
+            showTagsContainer={this.state.showTagsContainer}
+          />
 
           <input
             type="file"
