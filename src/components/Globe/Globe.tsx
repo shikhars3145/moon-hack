@@ -57,6 +57,7 @@ function useCameraControl(target: Vector3) {
   const controls = useMemo(() => new OrbitControls(camera, domElement), [camera, domElement]);
   controls.rotateSpeed = 0.5;
   controls.minDistance = EARTH_RADIUS + 0.1;
+  controls.maxDistance = EARTH_RADIUS * 10;
 
   // Update focus target.
   useEffect(() => {
@@ -118,6 +119,14 @@ type EarthProps = {
 function Earth(props: EarthProps) {
   const earthMaterial = useMaterial(earthImage);
   const earthShape = useSphere(EARTH_RADIUS);
+  const { camera } = useThree();
+
+  // Initialize camera position.
+  useEffect(() => {
+    camera.position.x = props.position[0] + EARTH_RADIUS * 2;
+    camera.position.y = props.position[1];
+    camera.position.z = props.position[2];
+  }, [camera, props.position]);
 
   useCameraControl(new Vector3(...props.position));
 
