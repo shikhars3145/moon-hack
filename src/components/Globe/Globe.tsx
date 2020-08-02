@@ -4,6 +4,7 @@ import { TextureLoader, MeshStandardMaterial, SphereBufferGeometry, Vector3, Con
 import { Canvas, useThree, useFrame } from "react-three-fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import earthImage from "./earthmap1k.jpg";
+import Modal from "../Modal/Modal";
 
 const EARTH_RADIUS = 10;
 
@@ -77,13 +78,14 @@ function useCameraControl(target: Vector3) {
 type MarkerProps = {
   longitude: number,
   latitude: number
+  onClick?: () => void
 }
 
 function degToRad(deg: number) {
   return deg * Math.PI / 180;
 }
 
-function Marker({longitude, latitude}: MarkerProps) {
+function Marker({longitude, latitude, onClick}: MarkerProps) {
   const geometry = useCone(0.1, 0.5);
 
   // Convert coordinates to cartesian.
@@ -109,6 +111,7 @@ function Marker({longitude, latitude}: MarkerProps) {
       position={position}
       rotation={rotation}
       geometry={geometry}
+      onClick={onClick}
       onPointerOver={e => setHover(true)}
       onPointerOut={e => setHover(false)}>
       <meshStandardMaterial attach="material" color={hovered ? "hotpink" : "orange"} />
@@ -152,6 +155,7 @@ type GlobeProps = {
 };
 
 function Globe({ images }: GlobeProps) {
+  const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
   return (
     <div className={style.container}>
       <Canvas>
@@ -162,10 +166,22 @@ function Globe({ images }: GlobeProps) {
               key={image.url}
               latitude={image.latitude}
               longitude={image.longitude}
+              onClick={() => setSelectedImage(image)}
             />
           ))}
         </Earth>
       </Canvas>
+      <Modal
+        show={selectedImage !== null}
+        hide={() => setSelectedImage(null)}>
+        {selectedImage && (
+          <>
+            <img src={selectedImage.url} alt="night sky" />
+            <p>Coordinates : {selectedImage.latitude}, {selectedImage.longitude}</p>
+            <p>Timestamp : {selectedImage.timestamp}</p>
+          </>
+        )}
+      </Modal>
     </div>
   );
 }
