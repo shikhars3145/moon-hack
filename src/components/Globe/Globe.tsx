@@ -7,6 +7,13 @@ import earthImage from "./earthmap1k.jpg";
 
 const EARTH_RADIUS = 10;
 
+export type ImageData = {
+  timestamp: number,
+  latitude: number,
+  longitude: number,
+  url: string
+};
+
 /**
  * Make an image material.
  * @param imageUrl URL of an image to be used as texture.
@@ -110,7 +117,8 @@ function Marker({longitude, latitude}: MarkerProps) {
 }
 
 type EarthProps = {
-  position: [number, number, number]
+  position: [number, number, number],
+  children: React.ReactNode
 };
 
 /**
@@ -139,12 +147,24 @@ function Earth(props: EarthProps) {
   )
 }
 
-function Globe() {
+type GlobeProps = {
+  images: ReadonlyArray<ImageData>
+};
+
+function Globe({ images }: GlobeProps) {
   return (
     <div className={style.container}>
       <Canvas>
         <ambientLight />
-        <Earth position={[0, 0, 0]} />
+        <Earth position={[0, 0, 0]}>
+          {images.map((image) => (
+            <Marker
+              key={image.url}
+              latitude={image.latitude}
+              longitude={image.longitude}
+            />
+          ))}
+        </Earth>
       </Canvas>
     </div>
   );
