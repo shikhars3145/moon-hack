@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './StudyPage.scss';
 import ButtonPrimary from '../../components/ButtonPrimary/ButtonPrimary';
 import axios from 'axios';
-import qs from 'qs';
+import db from '../../firebase';
+import firebase from 'firebase';
 
 import {
   login as astLogin,
@@ -40,9 +41,6 @@ export class StudyPage extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log(process.env.REACT_APP_REACT_APP_ASTROMETRY_API_KEY);
-
-    // get USER LOCATION
     const radarRes = await axios.get('https://api.radar.io/v1/geocode/ip', {
       headers: {
         authorization: 'prj_live_sk_4216c851eed8ba07a7b61295c5f2a15ce87ea971',
@@ -56,6 +54,12 @@ export class StudyPage extends Component {
     console.log(latitude, longitude);
 
     // Firebase code here
+
+    setTimeout(function () {
+      db.collection('users').add({
+        image: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+    }, 5000);
 
     // ASTROMETRY API
     // login

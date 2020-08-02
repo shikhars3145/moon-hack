@@ -10,6 +10,7 @@ import StudyPage from './pages/StudyPage/StudyPage';
 import BgVideo from './components/BgVideo/BgVideo';
 
 function App() {
+  
   return (
     <div className="App">
       <Header />
