@@ -1,0 +1,28 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background: rgba(100, 100, 100, 0.5);
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.modal {
+  background: #111;
+  color: white;
+  font-size: medium;
+  display: grid;
+  justify-items: left;
+  grid-template-rows: 1fr auto auto;
+  box-shadow: 0 15px 15px black;
+
+  img {
+    width: 100%;
+  }
+}
