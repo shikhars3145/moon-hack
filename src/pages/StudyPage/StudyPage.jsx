@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './StudyPage.scss';
 import ButtonPrimary from '../../components/ButtonPrimary/ButtonPrimary';
+import db from '../../firebase';
+import firebase from 'firebase';
 
 export class StudyPage extends Component {
   constructor() {
@@ -29,6 +31,11 @@ export class StudyPage extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    setTimeout( function(){
+      db.collection('users').add({
+        image: firebase.firestore.FieldValue.serverTimestamp()
+      })
+    },5000)
   };
 
   render() {
